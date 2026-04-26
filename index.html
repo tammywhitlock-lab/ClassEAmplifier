@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Class E Amplifier Calculator</title>
+</head>
+<body>
+  <h1>Class E Amplifier Calculator</h1>
+
+  <p>Free calculator for experienced amateur RF experimenters.</p>
+
+  <label>Supply voltage:</label>
+  <input id="voltage" type="number" placeholder="Volts">
+
+  <br><br>
+
+  <label>Output power:</label>
+  <input id="power" type="number" placeholder="Watts">
+
+  <br><br>
+
+  <button onclick="calculate()">Calculate</button>
+
+  <h2>Results</h2>
+  <div id="results"></div>
+
+  <h2>Email list</h2>
+  <p>Join the list to get updates when advanced calculators and the book are ready.</p>
+
+  <!-- Replace this later with MailerLite/Mailchimp form code -->
+  <form>
+    <input type="email" placeholder="Your email">
+    <button type="submit">Join list</button>
+  </form>
+
+  <script>
+    function calculate() {
+      const voltage = Number(document.getElementById("voltage").value);
+      const power = Number(document.getElementById("power").value);
+
+      if (!voltage || !power) {
+        document.getElementById("results").innerHTML = "Enter voltage and power.";
+        return;
+      }
+
+      const loadResistance = (voltage * voltage) / power;
+
+      document.getElementById("results").innerHTML =
+        "<p>Estimated load resistance: " + loadResistance.toFixed(2) + " ohms</p>";
+    }
+  </script>
+</body>
+</html>

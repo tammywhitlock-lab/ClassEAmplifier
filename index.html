@@ -3,51 +3,71 @@
 <head>
   <meta charset="UTF-8">
   <title>Class E Amplifier Calculator</title>
+  <style>
+    body {
+      font-family: Arial;
+      max-width: 700px;
+      margin: 40px auto;
+      line-height: 1.5;
+    }
+    input, button {
+      padding: 8px;
+      margin: 5px 0;
+      width: 100%;
+    }
+    .box {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-top: 20px;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Class E Amplifier Calculator</h1>
 
-  <p>Free calculator for experienced amateur RF experimenters.</p>
+<h1>Class E Amplifier Calculator</h1>
 
-  <label>Supply voltage:</label>
-  <input id="voltage" type="number" placeholder="Volts">
+<p>
+Design Class E amplifiers using practical starting values.
+</p>
 
-  <br><br>
+<div class="box">
+  <h2>Inputs</h2>
 
-  <label>Output power:</label>
-  <input id="power" type="number" placeholder="Watts">
+  <label>Supply Voltage (V)</label>
+  <input id="voltage" type="number">
 
-  <br><br>
+  <label>Output Power (W)</label>
+  <input id="power" type="number">
+
+  <label>Frequency (MHz)</label>
+  <input id="freq" type="number">
 
   <button onclick="calculate()">Calculate</button>
+</div>
 
+<div class="box">
   <h2>Results</h2>
-  <div id="results"></div>
+  <div id="results">Enter values and click calculate.</div>
+</div>
 
-  <h2>Email list</h2>
-  <p>Join the list to get updates when advanced calculators and the book are ready.</p>
+<script>
+function calculate() {
+  const V = Number(document.getElementById("voltage").value);
+  const P = Number(document.getElementById("power").value);
+  const f = Number(document.getElementById("freq").value);
 
-  <!-- Replace this later with MailerLite/Mailchimp form code -->
-  <form>
-    <input type="email" placeholder="Your email">
-    <button type="submit">Join list</button>
-  </form>
+  if (!V || !P || !f) {
+    document.getElementById("results").innerHTML = "Fill all fields.";
+    return;
+  }
 
-  <script>
-    function calculate() {
-      const voltage = Number(document.getElementById("voltage").value);
-      const power = Number(document.getElementById("power").value);
+  const R = (V * V) / P;
 
-      if (!voltage || !power) {
-        document.getElementById("results").innerHTML = "Enter voltage and power.";
-        return;
-      }
+  document.getElementById("results").innerHTML =
+    "Estimated load resistance: " + R.toFixed(2) + " ohms";
+}
+</script>
 
-      const loadResistance = (voltage * voltage) / power;
-
-      document.getElementById("results").innerHTML =
-        "<p>Estimated load resistance: " + loadResistance.toFixed(2) + " ohms</p>";
-    }
-  </script>
 </body>
 </html>
